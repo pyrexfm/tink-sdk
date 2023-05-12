@@ -34,12 +34,22 @@ export type AccessTokenRequest = {
   scope: string;
 };
 
+export type Scope =
+  | "accounts:read"
+  | "transactions:read"
+  | "user:create"
+  | "user:read"
+  | "user:delete"
+  | "authorization:grant";
+
 export type AccessTokenResponse = {
   access_token: string;
   token_type: string;
   expires_in: number;
   scope: string;
 };
+
+export type AccessToken = AccessTokenResponse & { expiresAt: Date };
 
 export type UserAccessTokenRequest = {
   code: string;
@@ -53,7 +63,6 @@ export type UserAccessTokenResponse = {
 };
 
 export type CreateUserRequest = {
-  accessToken: string;
   externalUserId: string;
   market: string;
   locale: string;
@@ -106,7 +115,6 @@ export type DeleteUserRequest = {
 };
 
 export type CreateUserGrantRequest = {
-  accessToken: string;
   hint: string;
   scope: string;
 } & (
@@ -125,7 +133,6 @@ export type CreateUserGrantResponse = {
 };
 
 export type UserCodeRequest = {
-  accessToken: string;
   scope: string;
 } & (
   | {

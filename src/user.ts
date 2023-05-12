@@ -29,11 +29,12 @@ export default class UserApi {
    * @returns a new user
    */
   async createUser({
-    accessToken,
     externalUserId,
     market = "GB",
     locale = "en_US",
   }: CreateUserRequest): Promise<CreateUserResponse> {
+    const accessToken = await this.client.requireToken("user:create");
+
     const response = await this.client.request({
       endpoint: "v1/user/create",
       headers: this.client.tokenHeader(accessToken),
@@ -89,12 +90,13 @@ export default class UserApi {
    * @returns a new user delegate code
    */
   async generateUserDelegateCode({
-    accessToken,
     userId,
     externalUserId,
     hint,
     scope,
   }: CreateUserGrantRequest): Promise<CreateUserGrantResponse> {
+    const accessToken = await this.client.requireToken("authorization:grant");
+
     const response = await this.client.request({
       endpoint: "v1/oauth/authorization-grant/delegate",
       headers: this.client.tokenHeader(accessToken),
@@ -121,11 +123,11 @@ export default class UserApi {
    * @returns a new user access code
    */
   async generateUserCode({
-    accessToken,
     userId,
     externalUserId,
     scope,
   }: UserCodeRequest): Promise<UserCodeResponse> {
+    const accessToken = await this.client.requireToken("authorization:grant");
     const response = await this.client.request({
       endpoint: "v1/oauth/authorization-grant",
       headers: this.client.tokenHeader(accessToken),

@@ -1,5 +1,6 @@
 import DataApi from "./data";
 import {
+  AccessToken,
   AccessTokenRequest,
   AccessTokenResponse,
   UserAccessTokenRequest,
@@ -8,6 +9,7 @@ import {
   BodyType,
   RequestParameters,
   QueryParametersType,
+  Scope,
 } from "./types";
 import UserApi from "./user";
 
@@ -20,6 +22,8 @@ export default class TinkClient {
   headers: HeadersType;
   data: DataApi;
   user: UserApi;
+
+  tokens: Map<Scope, AccessToken> = new Map();
 
   constructor({
     clientId,
@@ -139,6 +143,32 @@ export default class TinkClient {
     return {
       Authorization: `Bearer ${token}`,
     };
+  }
+
+  setAccessToken(scope: Scope, token: AccessToken) {
+    this.tokens.set(scope, token);
+  }
+
+  async requireToken(scope: Scope) {
+    var token = this.tokens.get(scope);
+
+    if (!token) {
+      const response = await this.generateAccessToken({ scope: scope });
+      token = {
+        ...response,
+        expiresAt: new Date(Date.now() + response.expires_in),
+      };
+    } else if (token.expiresAt < new Date()) {
+      const response = await this.generateAccessToken({ scope: scope });
+      token = {
+        ...response,
+        expiresAt: new Date(Date.now() + response.expires_in),
+      };
+    }
+
+    this.tokens.set(scope, token);
+
+    return token.access_token;
   }
 
   /**
