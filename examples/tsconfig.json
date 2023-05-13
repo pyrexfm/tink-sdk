@@ -1,8 +1,0 @@
-{
-  "compilerOptions": {
-    "target": "es2017",
-    "module": "esnext",
-    "noImplicitAny": true
-  },
-  "include": ["./**/*.ts", "./**/*.mts"]
-}
