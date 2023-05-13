@@ -24,6 +24,6 @@ jobs:
           node-version: 16.x
           cache: "pnpm"
       - run: pnpm install --frozen-lockfile
-      - run: pnpm run release
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - run: |
+          npm set //registry.npmjs.org/:_authToken ${{ secrets.NPM_TOKEN }}
+          pnpm run release
