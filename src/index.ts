@@ -110,7 +110,7 @@ export default class TinkClient {
       fetchOptions
     );
 
-    if (response.status >= 400) {
+    if (response.status >= 300) {
       throw {
         name: "Request failed",
         message: `Request failed with status ${response.status}: ${response.statusText}`,
