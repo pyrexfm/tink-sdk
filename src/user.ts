@@ -36,7 +36,7 @@ export default class UserApi {
     const accessToken = await this.client.requireToken("user:create");
 
     const response = await this.client.request({
-      endpoint: "v1/user/create",
+      endpoint: "api/v1/user/create",
       headers: this.client.tokenHeader(accessToken),
       body: {
         external_user_id: externalUserId,
@@ -98,7 +98,7 @@ export default class UserApi {
     const accessToken = await this.client.requireToken("authorization:grant");
 
     const response = await this.client.request({
-      endpoint: "v1/oauth/authorization-grant/delegate",
+      endpoint: "api/v1/oauth/authorization-grant/delegate",
       headers: this.client.tokenHeader(accessToken),
       body: {
         actor_client_id: this.client.clientActorId || "",
@@ -129,7 +129,7 @@ export default class UserApi {
   }: UserCodeRequest): Promise<UserCodeResponse> {
     const accessToken = await this.client.requireToken("authorization:grant");
     const response = await this.client.request({
-      endpoint: "v1/oauth/authorization-grant",
+      endpoint: "api/v1/oauth/authorization-grant",
       headers: this.client.tokenHeader(accessToken),
       body: {
         actor_client_id: this.client.clientActorId || "",

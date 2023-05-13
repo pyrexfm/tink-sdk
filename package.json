@@ -1,10 +1,23 @@
 {
   "name": "tink-sdk",
   "license": "MIT",
-  "version": "0.0.1",
+  "version": "0.0.2",
+  "description": "Unofficial Tink.com SDK for Node.js",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
+  "private": false,
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pyrexfm/tink-sdk"
+  },
+  "author": "Francisco Pires",
   "devDependencies": {
     "@changesets/cli": "^2.26.1",
     "tsup": "^6.7.0",
@@ -12,6 +25,7 @@
   },
   "scripts": {
     "build": "tsup src/index.ts --format cjs,esm --dts",
-    "lint": "tsc"
+    "lint": "tsc",
+    "release": "pnpm run build && changeset publish"
   }
 }

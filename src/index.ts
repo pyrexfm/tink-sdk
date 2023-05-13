@@ -29,7 +29,7 @@ export default class TinkClient {
     clientId,
     clientSecret,
     clientActorId = "df05e4b379934cd09963197cc855bfe9",
-    baseUrl = "https://api.tink.com/api",
+    baseUrl = "https://api.tink.com",
     baseLinkURL = "https://link.tink.com",
   }: {
     clientId: string;
@@ -45,7 +45,7 @@ export default class TinkClient {
     this.baseLinkURL = baseLinkURL;
     this.headers = {
       accept: "application/json",
-      "User-Agent": "Tink-Node-TS",
+      "User-Agent": "Tink-Node-JS",
     };
     this.user = new UserApi({ client: this });
     this.data = new DataApi({ client: this });
@@ -103,22 +103,24 @@ export default class TinkClient {
 
     const url = `${this.baseUrl}/${endpoint}`;
 
-    console.log("URL:", url);
-    console.log("queryParamsString", queryParamsString);
-    console.log("fetchOptions", fetchOptions);
-
     // Make request
     const response: Response = await fetch(
       `${url}?${queryParamsString}`,
       fetchOptions
     );
 
-    console.log("response", response);
-
     if (response.status >= 400) {
-      throw new Error(
-        `Request failed with status ${response.status}: ${response.statusText}`
-      );
+      throw {
+        name: "Request failed",
+        message: `Request failed with status ${response.status}: ${response.statusText}`,
+        status: response.status,
+        statusText: response.statusText,
+        request: {
+          url: `${url}?${queryParamsString}`,
+          options: JSON.stringify(fetchOptions, null, 4),
+        },
+        response: response,
+      };
     }
 
     // Parse response
@@ -180,7 +182,7 @@ export default class TinkClient {
     scope,
   }: AccessTokenRequest): Promise<AccessTokenResponse> {
     const response = await this.request({
-      endpoint: "v1/oauth/token",
+      endpoint: "api/v1/oauth/token",
       body: {
         client_id: this.clientId,
         client_secret: this.clientSecret,
@@ -203,7 +205,7 @@ export default class TinkClient {
     code,
   }: UserAccessTokenRequest): Promise<UserAccessTokenResponse> {
     const response = await this.request({
-      endpoint: "v1/oauth/token",
+      endpoint: "api/v1/oauth/token",
       body: {
         client_id: this.clientId,
         client_secret: this.clientSecret,

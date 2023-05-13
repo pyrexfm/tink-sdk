@@ -65,7 +65,7 @@ export default class DataApi {
     statuses,
   }: GetTransactionsRequest): Promise<GetTransactionsResponse> {
     const response = await this.client.request({
-      endpoint: "data/v2/accounts",
+      endpoint: "data/v2/transactions",
       parameters: {
         ...(accountIds && { accountIdIn: accountIds }),
         ...(pageSize && { pageSize: pageSize }),
