@@ -10,6 +10,7 @@ import {
   RequestParameters,
   QueryParametersType,
   Scope,
+  Value,
 } from "./types";
 import UserApi from "./user";
 
@@ -151,6 +152,10 @@ export default class TinkClient {
     this.tokens.set(scope, token);
   }
 
+  getValue(value: Value) {
+    return value.unscaledValue * Math.pow(10, -1 * value.scale);
+  }
+
   async requireToken(scope: Scope) {
     var token = this.tokens.get(scope);
 
@@ -158,13 +163,13 @@ export default class TinkClient {
       const response = await this.generateAccessToken({ scope: scope });
       token = {
         ...response,
-        expiresAt: new Date(Date.now() + response.expires_in),
+        expiresAt: new Date(Date.now() + response.expires_in * 1000),
       };
     } else if (token.expiresAt < new Date()) {
       const response = await this.generateAccessToken({ scope: scope });
       token = {
         ...response,
-        expiresAt: new Date(Date.now() + response.expires_in),
+        expiresAt: new Date(Date.now() + response.expires_in * 1000),
       };
     }
 
