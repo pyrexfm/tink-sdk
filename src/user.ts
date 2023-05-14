@@ -144,21 +144,4 @@ export default class UserApi {
 
     return response;
   }
-
-  /**
-   * Returns an object with a list of all available markets in which a user could register with
-   * @param desired - The ISO 3166-1 alpha-2 country code of the market
-   * @returns List of markets
-   */
-  async getMarkets({ desired }: MarketsRequest): Promise<MarketsResponse> {
-    const response = await this.client.request({
-      endpoint: "api/v1/user/markets/list",
-      method: "GET",
-      parameters: {
-        desired: desired,
-      },
-    });
-
-    return response;
-  }
 }

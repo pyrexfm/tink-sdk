@@ -40,7 +40,8 @@ export type Scope =
   | "user:create"
   | "user:read"
   | "user:delete"
-  | "authorization:grant";
+  | "authorization:grant"
+  | "providers:read";
 
 export type AccessTokenResponse = {
   access_token: string;
@@ -297,7 +298,7 @@ export type CountryCode =
   | "US";
 
 export type MarketsRequest = {
-  desired: CountryCode;
+  desired?: CountryCode;
 };
 
 export type MarketsResponse = {
@@ -316,4 +317,107 @@ export type Market = {
   defaultTimeZone: string;
   description: string;
   suggested: boolean;
+};
+
+export type Capability =
+  | "UNKNOWN"
+  | "TRANSFERS"
+  | "MORTGAGE_AGGREGATION"
+  | "CHECKING_ACCOUNTS"
+  | "SAVINGS_ACCOUNTS"
+  | "CREDIT_CARDS"
+  | "INVESTMENTS"
+  | "LOANS"
+  | "PAYMENTS"
+  | "MORTGAGE_LOAN"
+  | "IDENTITY_DATA"
+  | "CREATE_BENEFICIARIES"
+  | "LIST_BENEFICIARIES"
+  | "CREATE_BENEFICIARIES_IN_PAYMENT";
+
+export type ProvidersRequest = {
+  userAccessToken: string;
+  includeTestProviders?: boolean;
+  excludeNonTestProviders?: boolean;
+  capability?: Capability;
+  name?: string;
+};
+
+export type ProvidersResponse = {
+  providers: Provider[];
+};
+
+type Provider = {
+  accessType: string;
+  authenticationFlow: string;
+  authenticationUserType: string;
+  capabilities: Capability[];
+  credentialsType: string;
+  currency: string;
+  displayDescription: string;
+  displayName: string;
+  fields: Field[];
+  financialInstitutionId: string;
+  financialInstitutionName: string;
+  financialServices: {
+    segment: string;
+    shortName: string;
+  }[];
+  groupDisplayName: string;
+  hasAuthenticationOptions: boolean;
+  healthStatus: {
+    providerLogin: {
+      status: string;
+    };
+  };
+  images: {
+    banner: string;
+    icon: string;
+  };
+  loginHeaderColour: string;
+  market: string;
+  multiFactor: boolean;
+  name: string;
+  passwordHelpText: string;
+  pisCapabilities: string[];
+  popular: boolean;
+  releaseStatus: string;
+  status: string;
+  transactional: boolean;
+  type: string;
+};
+
+type Field = {
+  additionalInfo: string;
+  checkbox: boolean;
+  description: string;
+  group: string;
+  helpText: string;
+  hint: string;
+  immutable: boolean;
+  masked: boolean;
+  maxLength: number;
+  minLength: number;
+  name: string;
+  numeric: boolean;
+  oneOf: boolean;
+  optional: boolean;
+  pattern: string;
+  patternError: string;
+  selectOptions: {
+    iconUrl: string;
+    text: string;
+    value: string;
+  }[];
+  sensitive: boolean;
+  style: string;
+  type: string;
+  value: string;
+};
+
+export type ProviderMarketRequest = {
+  market: CountryCode;
+  includeTestProviders?: boolean;
+  excludeNonTestProviders?: boolean;
+  capability?: Capability;
 };
