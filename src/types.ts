@@ -149,9 +149,8 @@ export type UserCodeResponse = {
   code: string;
 };
 
-export type GenerateLinkRequest = {
-  endpoint: string;
-  authorizationCode: string;
+export type GenerateTransactionsLinkRequest = {
+  code: string;
   locale: string;
   market: string;
   redirectUri: string;

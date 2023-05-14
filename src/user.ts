@@ -8,7 +8,6 @@ import {
   DeleteUserRequest,
   CreateUserGrantRequest,
   CreateUserGrantResponse,
-  GenerateLinkRequest,
   UserCodeRequest,
   UserCodeResponse,
   MarketsResponse,
@@ -161,34 +160,5 @@ export default class UserApi {
     });
 
     return response;
-  }
-
-  /**
-   * Generates a link to Tink Link
-   * @param endpoint - The endpoint to generate the link for
-   * @param authorizationCode - The authorization code to generate the link for
-   * @param locale - The locale to generate the link for
-   * @param market - The market to generate the link for
-   * @param redirectUri - The redirect uri that the user will be redirected to after completing the flow
-   * @param state - The state that should be added to the redirect link
-   */
-  getAuthorizationLink({
-    endpoint,
-    authorizationCode,
-    locale,
-    market,
-    redirectUri,
-    state,
-  }: GenerateLinkRequest) {
-    return this.client.generateLink({
-      endpoint: endpoint,
-      parameters: {
-        authorization_code: authorizationCode,
-        locale: locale,
-        market: market,
-        redirect_uri: redirectUri,
-        state: state || "",
-      },
-    });
   }
 }

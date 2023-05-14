@@ -1,4 +1,5 @@
 import DataApi from "./data";
+import LinkApi from "./link";
 import {
   AccessToken,
   AccessTokenRequest,
@@ -23,6 +24,7 @@ export default class TinkClient {
   headers: HeadersType;
   data: DataApi;
   user: UserApi;
+  link: LinkApi;
 
   tokens: Map<Scope, AccessToken> = new Map();
 
@@ -50,6 +52,7 @@ export default class TinkClient {
     };
     this.user = new UserApi({ client: this });
     this.data = new DataApi({ client: this });
+    this.link = new LinkApi({ client: this });
   }
 
   generateLink({
