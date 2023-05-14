@@ -170,6 +170,17 @@ export interface GetAccountsReponse {
   nextPageToken: string;
 }
 
+export type AccountType =
+  | "CHECKING"
+  | "SAVINGS"
+  | "INVESTMENT"
+  | "MORTGAGE"
+  | "CREDIT_CARD"
+  | "LOAN"
+  | "PENSION"
+  | "OTHER"
+  | "EXTERNAL";
+
 export interface Account {
   balances: {
     booked: {
@@ -192,7 +203,7 @@ export interface Account {
     };
   };
   name: string;
-  type: string;
+  type: AccountType;
 }
 
 export interface Amount {

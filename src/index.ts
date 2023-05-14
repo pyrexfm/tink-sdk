@@ -15,6 +15,10 @@ import {
 } from "./types";
 import UserApi from "./user";
 
+export function getValue(value: Value) {
+  return value.unscaledValue * Math.pow(10, -1 * value.scale);
+}
+
 export default class TinkClient {
   clientId: string;
   clientSecret: string;
