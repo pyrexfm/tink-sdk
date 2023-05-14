@@ -120,10 +120,10 @@ export type CreateUserGrantRequest = {
 } & (
   | {
       userId: string;
-      externalUserId: never;
+      externalUserId?: never;
     }
   | {
-      userId: never;
+      userId?: never;
       externalUserId: string;
     }
 );
@@ -254,3 +254,67 @@ export interface Transaction {
     type: string;
   };
 }
+
+export type CountryCode =
+  | "AT"
+  | "AU"
+  | "BE"
+  | "BG"
+  | "BR"
+  | "CA"
+  | "CH"
+  | "CY"
+  | "CZ"
+  | "DE"
+  | "DK"
+  | "EE"
+  | "ES"
+  | "FI"
+  | "FO"
+  | "FR"
+  | "GB"
+  | "GR"
+  | "HR"
+  | "HU"
+  | "IE"
+  | "IN"
+  | "IT"
+  | "LT"
+  | "LU"
+  | "LV"
+  | "MT"
+  | "MX"
+  | "NL"
+  | "NO"
+  | "NZ"
+  | "PL"
+  | "PT"
+  | "RO"
+  | "SE"
+  | "SG"
+  | "SI"
+  | "SK"
+  | "UK"
+  | "US";
+
+export type MarketsRequest = {
+  desired: CountryCode;
+};
+
+export type MarketsResponse = {
+  markets: Market[];
+};
+
+export type Market = {
+  code: string;
+  currencies: {
+    code: string;
+    factor: number;
+    prefixed: boolean;
+    symbol: string;
+  }[];
+  defaultCurrency: string;
+  defaultTimeZone: string;
+  description: string;
+  suggested: boolean;
+};

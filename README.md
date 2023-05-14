@@ -17,19 +17,19 @@ Then, depending upon your usage context, add a reference to it:
 
 ### CommonJS / Node
 
-```
+```typescript
 const tink = require("tink-sdk");
 ```
 
 ### ESM / TypeScript
 
-```
+```typescript
 import TinkClient from "tink-sdk";
 ```
 
 ## Usage
 
-To use this client you must have a Client Id and Client Secret from [Tink Console](https://console.tink.com/app-settings/client).
+To use this client you must have a Client ID and Client Secret from [Tink console](https://console.tink.com/app-settings/client).
 
 ```typescript
 import TinkClient from "tink-sdk";
@@ -53,12 +53,16 @@ You don't need to generate an access token for each operation as the SDK handles
 If a response is returned with a code >= 300, instead of returning the response,
 the response will be thrown as an error to be caught. The error has the following fields:
 
-- name: "Request failed",
-- message: "Request failed with status 404: Not found",
-- status: 404,
-- statusText: Not found,
-- request: {
-  url: `http://tink.api.com/notfound?foo=bar`,
-  options: fetchOptions,
+```typescript
+{
+  name: "Request failed",
+  message: "Request failed with status 404: Not found",
+  status: 404,
+  statusText: "Not found",
+  request: {
+    url: `http://tink.api.com/notfound?foo=bar`,
+    options: fetchOptions,
   }
-- response: Fetch response object
+  response: "Fetch response object"
+}
+```
