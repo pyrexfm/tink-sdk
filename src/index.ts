@@ -111,6 +111,8 @@ export default class TinkClient {
       fetchOptions.headers = { ...this.headers, ...headers };
     }
 
+    fetchOptions.cache = "no-store";
+
     const url = `${this.baseUrl}/${endpoint}`;
 
     // Make request
