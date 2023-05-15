@@ -1,5 +1,6 @@
 import DataApi from "./data";
 import LinkApi from "./link";
+import UserApi from "./user";
 import {
   AccessToken,
   AccessTokenRequest,
@@ -13,7 +14,8 @@ import {
   Scope,
   Value,
 } from "./types";
-import UserApi from "./user";
+
+export * from "./types";
 
 export function getValue(value: Value) {
   return value.unscaledValue * Math.pow(10, -1 * value.scale);
