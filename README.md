@@ -1,7 +1,6 @@
 # Tink API Unofficial JavaScript API
 
-[![CI](https://github.com/pyrexfm/tink-sdk/actions/workflows/main.yml/badge.svg)](https://github.com/pyrexfm/tink-sdk/actions/workflows/main.yml)
-[![npm version](https://badge.fury.io/js/tink-sdk.svg)](https://badge.fury.io/js/tink-sdk)
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/pyrexfm)
 
 The documentation for the Tink API is available here [here](https://api.ynab.com). Not all endpoints are available but feel free to contribute!
 
