@@ -456,9 +456,23 @@ export type ProviderConsent = {
   providerName: string;
   sessionExpiryDate: number;
   sessionExtendable: boolean;
-  status: string;
+  status: ProviderConsentStatus;
   statusUpdated: number;
 };
+
+export type ProviderConsentStatus =
+  | "CREATED"
+  | "AUTHENTICATING"
+  | "AWAITING_MOBILE_BANKID_AUTHENTICATION"
+  | "AWAITING_SUPPLEMENTAL_INFORMATION"
+  | "UPDATING"
+  | "UPDATED"
+  | "AUTHENTICATION_ERROR"
+  | "TEMPORARY_ERROR"
+  | "PERMANENT_ERROR"
+  | "AWAITING_THIRD_PARTY_APP_AUTHENTICATION"
+  | "DELETED"
+  | "SESSION_EXPIRED";
 
 export type ExtendConsentRequest = {
   userAccessToken: string;
