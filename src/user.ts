@@ -10,8 +10,6 @@ import {
   CreateUserGrantResponse,
   UserCodeRequest,
   UserCodeResponse,
-  MarketsResponse,
-  MarketsRequest,
 } from "./types";
 
 export default class UserApi {

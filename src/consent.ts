@@ -6,6 +6,10 @@ import {
   ProvidersRequest,
   ProvidersResponse,
   ProviderMarketRequest,
+  ProviderConsentsRequest,
+  ProviderConsentsResponse,
+  ExtendConsentRequest,
+  ExtendConsentResponse,
 } from "./types";
 
 export default class ConsentApi {
@@ -88,6 +92,54 @@ export default class ConsentApi {
         excludeNonTestProviders: excludeNonTestProviders || false,
         capability: capability || "",
       },
+    });
+
+    return response;
+  }
+
+  /**
+   * List all provider consents for the user
+   * @param userAccessToken - The user access token. Requires the provider-consents:read scope
+   * @returns List of provider consents
+   * @see https://docs.tink.com/api#connectivity-v1/provider-consent/list-provider-consents
+   */
+
+  async getProviderConsents({
+    userAccessToken,
+    credentialsId,
+  }: ProviderConsentsRequest): Promise<ProviderConsentsResponse> {
+    const response = await this.client.request({
+      endpoint: "api/v1/provider-consents",
+      method: "GET",
+      headers: this.client.tokenHeader(userAccessToken),
+
+      parameters: {
+        credentialsId: credentialsId || "",
+      },
+    });
+
+    return response;
+  }
+
+  /**
+   * Extend a consent that is eligible for reconfirmation (sessionExtendable attribute).
+   * @param userAccessToken - The user access token. Requires the provider-consents:write scope
+   * @param credentialsId - The provider consent credentialsId to extend
+   * @returns The updated provider consent
+   * @see https://docs.tink.com/api#connectivity-v1/provider-consent/extend-a-consent
+   */
+  async extendProviderConsent({
+    userAccessToken,
+    credentialsId,
+  }: ExtendConsentRequest): Promise<ExtendConsentResponse> {
+    const response = await this.client.request({
+      endpoint: "api/v1/provider-consents:extend",
+      method: "POST",
+      headers: this.client.tokenHeader(userAccessToken),
+      body: {
+        credentialsId: credentialsId,
+      },
+      contentType: "json",
     });
 
     return response;

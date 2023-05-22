@@ -432,3 +432,37 @@ export type ProviderMarketRequest = {
   excludeNonTestProviders?: boolean;
   capability?: Capability;
 };
+
+export type ProviderConsentsRequest = {
+  userAccessToken: string;
+  credentialsId?: string;
+};
+
+export type ProviderConsentsResponse = {
+  providerConsents: ProviderConsent[];
+};
+
+export type ProviderConsent = {
+  accountIds: string[];
+  credentialsId: string;
+  detailedError: {
+    details: {
+      reason: string;
+      retryable: boolean;
+    };
+    displayMessage: string;
+    type: string;
+  };
+  providerName: string;
+  sessionExpiryDate: number;
+  sessionExtendable: boolean;
+  status: string;
+  statusUpdated: number;
+};
+
+export type ExtendConsentRequest = {
+  userAccessToken: string;
+  credentialsId: string;
+};
+
+export type ExtendConsentResponse = ProviderConsent;
