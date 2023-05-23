@@ -358,7 +358,7 @@ export type ProvidersResponse = {
   providers: Provider[];
 };
 
-type Provider = {
+export type Provider = {
   accessType: string;
   authenticationFlow: string;
   authenticationUserType: string;
@@ -398,7 +398,7 @@ type Provider = {
   type: string;
 };
 
-type Field = {
+export type Field = {
   additionalInfo: string;
   checkbox: boolean;
   description: string;
