@@ -14,6 +14,8 @@ import {
   Scope,
   Value,
 } from "./types";
+import CredentialApi from "./credential";
+import ConsentApi from "./consent";
 
 export * from "./types";
 
@@ -31,6 +33,8 @@ export default class TinkClient {
   data: DataApi;
   user: UserApi;
   link: LinkApi;
+  credential: CredentialApi;
+  consent: ConsentApi;
 
   tokens: Map<Scope, AccessToken> = new Map();
 
@@ -59,6 +63,8 @@ export default class TinkClient {
     this.user = new UserApi({ client: this });
     this.data = new DataApi({ client: this });
     this.link = new LinkApi({ client: this });
+    this.credential = new CredentialApi({ client: this });
+    this.consent = new ConsentApi({ client: this });
   }
 
   generateLink({

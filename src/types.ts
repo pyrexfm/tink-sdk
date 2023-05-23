@@ -456,11 +456,11 @@ export type ProviderConsent = {
   providerName: string;
   sessionExpiryDate: number;
   sessionExtendable: boolean;
-  status: ProviderConsentStatus;
+  status: CredentialStatus;
   statusUpdated: number;
 };
 
-export type ProviderConsentStatus =
+export type CredentialStatus =
   | "CREATED"
   | "AUTHENTICATING"
   | "AWAITING_MOBILE_BANKID_AUTHENTICATION"
@@ -480,3 +480,24 @@ export type ExtendConsentRequest = {
 };
 
 export type ExtendConsentResponse = ProviderConsent;
+
+export type CredentialsRequest = {
+  userAccessToken: string;
+};
+
+export type Credential = {
+  fields: { [key: string]: string };
+  id: string;
+  providerName: string;
+  sessionExpiryDate: number;
+  status: CredentialStatus;
+  statusPayload: string;
+  statusUpdated: number;
+  type: string;
+  updated: number;
+  userId: string;
+};
+
+export type CredentialsResponse = {
+  credentials: Credential[];
+};
