@@ -10,10 +10,10 @@ export type QueryParametersType = {
   [key: string]: string[] | string | number | boolean;
 };
 
-export type RequestParameters = NonGetParameters | GetParameters;
+export type RequestParameters = RequestBodyParameters | RequestNoBodyParameters;
 
-export interface NonGetParameters {
-  method: "POST" | "PUT" | "DELETE";
+export interface RequestBodyParameters {
+  method: "POST" | "PUT";
   endpoint: string;
   parameters?: QueryParametersType;
   headers?: HeadersType;
@@ -21,8 +21,8 @@ export interface NonGetParameters {
   contentType: "none" | "json" | "x-www-form-urlencoded";
 }
 
-export interface GetParameters {
-  method: "GET";
+export interface RequestNoBodyParameters {
+  method: "GET" | "DELETE";
   endpoint: string;
   parameters?: QueryParametersType;
   headers?: HeadersType;
@@ -500,4 +500,9 @@ export type Credential = {
 
 export type CredentialsResponse = {
   credentials: Credential[];
+};
+
+export type DeleteCredentialRequest = {
+  userAccessToken: string;
+  credentialId: string;
 };

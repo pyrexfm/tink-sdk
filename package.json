@@ -1,7 +1,7 @@
 {
   "name": "tink-sdk",
   "license": "MIT",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "Unofficial Tink.com SDK for Node.js",
   "main": "dist/index.js",
   "module": "dist/index.mjs",

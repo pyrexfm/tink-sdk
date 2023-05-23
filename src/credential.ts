@@ -1,6 +1,10 @@
 import TinkClient from ".";
 
-import { CredentialsRequest, CredentialsResponse } from "./types";
+import {
+  CredentialsRequest,
+  CredentialsResponse,
+  DeleteCredentialRequest,
+} from "./types";
 
 export default class CredentialApi {
   client: TinkClient;
@@ -25,5 +29,16 @@ export default class CredentialApi {
     });
 
     return response;
+  }
+
+  async deleteCredential({
+    userAccessToken,
+    credentialId,
+  }: DeleteCredentialRequest): Promise<void> {
+    this.client.request({
+      endpoint: `api/v1/credentials/${credentialId}`,
+      method: "DELETE",
+      headers: this.client.tokenHeader(userAccessToken),
+    });
   }
 }
