@@ -266,47 +266,50 @@ export interface Transaction {
   };
 }
 
-export type CountryCode =
-  | "AT"
-  | "AU"
-  | "BE"
-  | "BG"
-  | "BR"
-  | "CA"
-  | "CH"
-  | "CY"
-  | "CZ"
-  | "DE"
-  | "DK"
-  | "EE"
-  | "ES"
-  | "FI"
-  | "FO"
-  | "FR"
-  | "GB"
-  | "GR"
-  | "HR"
-  | "HU"
-  | "IE"
-  | "IN"
-  | "IT"
-  | "LT"
-  | "LU"
-  | "LV"
-  | "MT"
-  | "MX"
-  | "NL"
-  | "NO"
-  | "NZ"
-  | "PL"
-  | "PT"
-  | "RO"
-  | "SE"
-  | "SG"
-  | "SI"
-  | "SK"
-  | "UK"
-  | "US";
+export const CountryCodes = [
+  "AT",
+  "AU",
+  "BE",
+  "BG",
+  "BR",
+  "CA",
+  "CH",
+  "CY",
+  "CZ",
+  "DE",
+  "DK",
+  "EE",
+  "ES",
+  "FI",
+  "FO",
+  "FR",
+  "GB",
+  "GR",
+  "HR",
+  "HU",
+  "IE",
+  "IN",
+  "IT",
+  "LT",
+  "LU",
+  "LV",
+  "MT",
+  "MX",
+  "NL",
+  "NO",
+  "NZ",
+  "PL",
+  "PT",
+  "RO",
+  "SE",
+  "SG",
+  "SI",
+  "SK",
+  "UK",
+  "US",
+] as const;
+
+export type CountryCode = (typeof CountryCodes)[number];
 
 export type MarketsRequest = {
   desired?: CountryCode;
